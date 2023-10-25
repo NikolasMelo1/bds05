@@ -1,4 +1,4 @@
-package com.devsuperior.movieflix;
+package com.devsuperior.movieflix.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -1,7 +1,9 @@
-package com.devsuperior.movieflix;
+package com.devsuperior.movieflix.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +15,9 @@ public class Genre implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @OneToMany(mappedBy = "genre")
+    private List<Movie> movies = new ArrayList<>();
 
     public Genre() {
     }
@@ -36,6 +41,10 @@ public class Genre implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Movie> getMovies() {
+        return movies;
     }
 
     @Override
