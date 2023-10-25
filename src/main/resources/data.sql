@@ -33,3 +33,11 @@ INSERT INTO tb_movie (title, subtitle, year, img_Url, synopsis, genre_id) VALUES
 ('Liga da Justiça', 'Snyder Cut', 2021, 'https://super.abril.com.br/wp-content/uploads/2020/05/si_justice_league_hbo.jpg', 'Depois de restaurar sua fé na humanidade e inspirado pelo ato altruísta do Superman, Bruce Wayne convoca Diana Prince para combater um inimigo ainda maior, recém-despertado. Juntos, Batman e Mulher-Maravilha buscam e recrutam um time de meta-humanos, mas mesmo com a formação da liga de heróis sem precedentes -- Batman, Mulher-Maravilha, Aquaman, Ciborgue, e Flash -- poderá ser tarde demais para salvar o planeta de um catastrófico ataque.', 3);
 INSERT INTO tb_movie (title, subtitle, year, img_Url, synopsis, genre_id) VALUES
 ('De Volta para o Futuro', null, 1985, 'https://deveserisso.com.br/blog/wp-content/uploads/2019/09/de-volta-para-o-futuro.jpg', 'Um jovem (Michael J. Fox) aciona acidentalmente uma máquina do tempo construída por um cientista (Christopher Lloyd) em um Delorean, retornando aos anos 50. Lá conhece sua mãe (Lea Thompson), antes ainda do casamento com seu pai, que fica apaixonada por ele. Tal paixão põe em risco sua própria existência, pois alteraria todo o futuro, forçando-o a servir de cupido entre seus pais.', 3);
+
+INSERT INTO tb_review (text, user_id, movie_id) VALUES ('Muito bom!', 1, 1);
+INSERT INTO tb_review (text, user_id, movie_id) VALUES ('Excelente', 2, 1);
+INSERT INTO tb_review (text, user_id, movie_id) VALUES ('Dei muita risada', 1, 4);
+INSERT INTO tb_review (text, user_id, movie_id) VALUES ('Para rir muito', 1, 6);
+INSERT INTO tb_review (text, user_id, movie_id) VALUES ('O melhor filme de comédia brasileiro', 2, 7);
+INSERT INTO tb_review (text, user_id, movie_id) VALUES ('Fenomenal', 2, 7);
+INSERT INTO tb_review (text, user_id, movie_id) VALUES ('Inesquecível', 1, 8);
