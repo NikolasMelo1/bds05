@@ -1,45 +1,58 @@
-package com.devsuperior.movieflix.entities;
+package com.devsuperior.movieflix.dto;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import com.devsuperior.movieflix.entities.Genre;
+import com.devsuperior.movieflix.entities.Movie;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-@Entity
-@Table(name = "tb_movie")
-public class Movie implements Serializable{
-    private static final long serialVersionUID = 1L;
+public class MovieDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Campo obrigatório")
     private String title;
     private String subTitle;
+
+    @PastOrPresent
     private Integer year;
+
+    @NotBlank(message = "Campo obrigatório")
     private String imgUrl;
 
-    @Column(columnDefinition = "TEXT")
+    @Size(min = 30, message = "Deve ter no mínimo 30 caracteres")
+    @NotBlank(message = "Campo obrigatório")
     private String synopsis;
 
-    @ManyToOne
-    @JoinColumn(name = "genre_id")
     private Genre genre;
 
-    @OneToMany(mappedBy = "movie")
-    private List<Review> reviews = new ArrayList<>();
+    private List<ReviewDTO> reviews = new ArrayList<>();
 
-    public Movie() {
+    public MovieDTO() {
     }
 
-    public Movie(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, Genre genre) {
+    public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis) {
+        super();
         this.id = id;
         this.title = title;
         this.subTitle = subTitle;
         this.year = year;
         this.imgUrl = imgUrl;
         this.synopsis = synopsis;
-        this.genre = genre;
+    }
+
+    public MovieDTO(Movie entity) {
+        id = entity.getId();
+        title = entity.getTitle();
+        subTitle = entity.getSubTitle();
+        year = entity.getYear();
+        imgUrl = entity.getImgUrl();
+        synopsis = entity.getSynopsis();
+        genre = entity.getGenre();
+        entity.getReviews().forEach(review -> this.reviews.add(new ReviewDTO(review)));
     }
 
     public Long getId() {
@@ -62,8 +75,8 @@ public class Movie implements Serializable{
         return subTitle;
     }
 
-    public void setSubTitle(String subtitle) {
-        this.subTitle = subtitle;
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
     public Integer getYear() {
@@ -98,20 +111,7 @@ public class Movie implements Serializable{
         this.genre = genre;
     }
 
-    public List<Review> getReviews() {
+    public List<ReviewDTO> getReviews() {
         return reviews;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Movie movie = (Movie) o;
-        return Objects.equals(id, movie.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }
