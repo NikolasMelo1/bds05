@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,12 +20,13 @@ public class UserResource {
     @Autowired
     private UserService service;
 
+    @PreAuthorize("hasRole('MEMBER')")
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll() {
         List<UserDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
-
+    @PreAuthorize("hasAnyRole('VISITOR', 'MEMBER')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<UserDTO> findById(@Valid @PathVariable Long id) {
         UserDTO dto = service.findById(id);

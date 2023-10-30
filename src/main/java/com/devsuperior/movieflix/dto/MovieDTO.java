@@ -2,6 +2,7 @@ package com.devsuperior.movieflix.dto;
 
 import com.devsuperior.movieflix.entities.Genre;
 import com.devsuperior.movieflix.entities.Movie;
+import com.devsuperior.movieflix.entities.Review;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
@@ -53,6 +54,11 @@ public class MovieDTO {
         imgUrl = entity.getImgUrl();
         synopsis = entity.getSynopsis();
         genreId = entity.getGenre().getId();
+    }
+
+    public MovieDTO(Movie entity, List<Review> reviews) {
+        this(entity);
+        reviews.forEach(rev -> this.reviews.add(new ReviewDTO(rev)));
     }
 
     public Long getId() {
