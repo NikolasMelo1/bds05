@@ -23,10 +23,6 @@ public class UserDTO implements Serializable {
     @NotBlank(message = "Favor entrar com um e-mail válido")
     private String email;
 
-    Set<RoleDTO> roles = new HashSet<>();
-
-    List<ReviewDTO> reviews = new ArrayList<>();
-
     public UserDTO() {
     }
 
@@ -41,7 +37,6 @@ public class UserDTO implements Serializable {
         id = entity.getId();
         name = entity.getName();
         email = entity.getEmail();
-        entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
     }
 
     public Long getId() {
@@ -68,11 +63,4 @@ public class UserDTO implements Serializable {
         this.email = email;
     }
 
-    public Set<RoleDTO> getRoles() {
-        return roles;
-    }
-
-    public List<ReviewDTO> getReviews() {
-        return reviews;
-    }
 }
