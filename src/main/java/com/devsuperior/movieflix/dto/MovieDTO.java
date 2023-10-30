@@ -7,10 +7,12 @@ import com.devsuperior.movieflix.entities.Review;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieDTO {
+public class MovieDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Long id;
 

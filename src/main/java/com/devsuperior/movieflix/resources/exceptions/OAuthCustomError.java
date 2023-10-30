@@ -1,4 +1,4 @@
-package com.devsuperior.movieflix.services.exceptions;
+package com.devsuperior.movieflix.resources.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
