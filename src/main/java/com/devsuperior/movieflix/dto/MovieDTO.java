@@ -27,14 +27,14 @@ public class MovieDTO {
     @NotBlank(message = "Campo obrigatório")
     private String synopsis;
 
-    private Genre genre;
+    private Long genreId;
 
     private List<ReviewDTO> reviews = new ArrayList<>();
 
     public MovieDTO() {
     }
 
-    public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis) {
+    public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, Long genreId) {
         super();
         this.id = id;
         this.title = title;
@@ -42,6 +42,7 @@ public class MovieDTO {
         this.year = year;
         this.imgUrl = imgUrl;
         this.synopsis = synopsis;
+        this.genreId = genreId;
     }
 
     public MovieDTO(Movie entity) {
@@ -51,8 +52,7 @@ public class MovieDTO {
         year = entity.getYear();
         imgUrl = entity.getImgUrl();
         synopsis = entity.getSynopsis();
-        genre = entity.getGenre();
-        entity.getReviews().forEach(review -> this.reviews.add(new ReviewDTO(review)));
+        genreId = entity.getGenre().getId();
     }
 
     public Long getId() {
@@ -103,12 +103,12 @@ public class MovieDTO {
         this.synopsis = synopsis;
     }
 
-    public Genre getGenre() {
-        return genre;
+    public Long getGenreId() {
+        return genreId;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void setGenreId(Long genreId) {
+        this.genreId = genreId;
     }
 
     public List<ReviewDTO> getReviews() {
