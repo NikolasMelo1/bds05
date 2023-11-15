@@ -20,16 +20,9 @@ public class UserResource {
     @Autowired
     private UserService service;
 
-    @PreAuthorize("hasRole('MEMBER')")
-    @GetMapping
-    public ResponseEntity<List<UserDTO>> findAll() {
-        List<UserDTO> list = service.findAll();
-        return ResponseEntity.ok().body(list);
-    }
-    @PreAuthorize("hasAnyRole('VISITOR', 'MEMBER')")
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> findById(@Valid @PathVariable Long id) {
-        UserDTO dto = service.findById(id);
-        return ResponseEntity.ok().body(dto);
+    @GetMapping(value = "/{profile}")
+    public ResponseEntity<UserDTO> findBySelf() {
+        UserDTO userDTO = service.findBySelf();
+        return ResponseEntity.ok().body(userDTO);
     }
 }

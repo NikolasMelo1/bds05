@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,24 +27,25 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository repository;
 
-    @Transactional(readOnly = true)
-    public List<UserDTO> findAll() {
-        List<User> list = repository.findAll();
-        return list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
-    }
+    @Autowired
+    private AuthService authService;
 
     @Transactional(readOnly = true)
-    public UserDTO findById(Long id) {
-        Optional<User> obj = repository.findById(id);
-        User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not fount"));
-        return new UserDTO(entity);
+    public UserDTO findBySelf() {
+
+        User user = authService.authenticated();
+        authService.validateSelfOrMember(user.getId());
+
+        return new UserDTO(user);
     }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         User user = repository.findByEmail(username);
         if (user == null) {
             logger.error("User not found: " + username);
-            throw new UsernameNotFoundException("Email not found");
+            throw new UsernameNotFoundException("Email not Found");
         }
         logger.info("User found: " + username);
         return user;
