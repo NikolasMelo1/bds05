@@ -1,6 +1,8 @@
+Movieflix - Sistema de avaliação de filmes
+
 Desafio final do Bootcamp DevSuperior, onde os instrutores passam informações sobre como deverá ser o sistema e serve para avaliação para obtenção do certificado do bootcamp.
 
-O sistema é dividido em 3 partes:
+sistema é dividido em 3 partes:
 
 Backend (REST API feito em Spring Boot)
 Frontend web (Website feito em React)
